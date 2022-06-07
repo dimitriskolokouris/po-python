@@ -11,12 +11,12 @@ def get_word(word_list):
 def question():
   i = 0 
   while i < 2:
-   answer = input("Welkom! Wil je galgje spelen? (Ja of Nee)")
-   if any(answer.lower() == f for f in ["Ja", 'J', 'ok', 'Y']):
-     print("Kom op dan!")
-     break
+    answer = input("Welkom! Wil je galgje spelen? (Ja of Nee)")
+    if any(answer.lower() == f for f in ["Ja", 'J', 'ok', 'Y']):
+      print("Kom op dan!")
+      break
 
-   else:
+    else:
      i+=1
      if i < 2:
        print("Weet je het zeker?")
@@ -26,10 +26,15 @@ def question():
 #Spel Begint
 question()
 def play(word):
-  word_completion = "_" * len*(word)
+  word_completion = "_" * len(word)
   guessed = False
   guessed_letters = []
   guessed_words = []
   tries = 6
-  
-     
+  print("Je mag nu een letter invullen!")
+  print(display_hangman(tries))
+  print(word_completion)
+  print("\n")
+
+def display_hangman(tries):
+  stages = []
