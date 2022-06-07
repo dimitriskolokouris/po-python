@@ -23,6 +23,13 @@ def question():
      else:
        print("Je moet!!!")
 
+#Spel Begint
+question()
+def play(word):
+  word_completion = "_" * len*(word)
+  guessed = False
+  guessed_letters = []
+  guessed_words = []
+  tries = 6
   
-
      
