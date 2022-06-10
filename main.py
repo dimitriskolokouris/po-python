@@ -23,7 +23,7 @@ def question():
      else:
        print("Je moet!!!")
 
-#Spel Begint
+#Spel Begin-Tussendoor-Einde
 question()
 def play(word):
   word_completion = "_" * len(word)
@@ -41,10 +41,103 @@ def play(word):
       if guess in guessed_letters:
         print("Je hebt deze letter al geprobeerd: ", guess, "!")
       elif guess not in word:
-        print(guess, "letter is niet in het woord: ")
+        print(guess, "letter is niet in het woord :(")
         tries -= 1
         guessed_letters.append(guess)
-
+      else:
+          print("Goed zo,", guess , "is in het woord!")
+          guessed_letters.append(guess)
+          word_as_list = list(word_completion)
+          indices = [i for i, letter in enumerate(word) if letter == guess]
+          for index in indices:
+            word_as_list[index] = guess
+          word_completion = "".join(word_as_list)
+          if "_" not in word_completion:
+            guessed = True
+    elif len(guess) == len(word) and guess.isalpha():
+      if guess in guessed_words: 
+        print("Je hebt dit al geprobeerd:", guess, "!")
+      elif guess != word:
+        print(guess, "is niet in het woord :(")
+        tries -= 1
+        guessed_words.append(guess)
+      else:
+        guessed = True
+        word_completion = word
+    else:
+        print("ongeldige input")
+      print(display_hangman(tries))
+      print(word_completion)
+      print("\n")
+    if guessed:
+      print("Goed zo, je hebt het woord geraden!")
+    else:
+      print("HELAAS! JE HEBT GEEN GOKKEN MEER. Het woord was" + word + ".Misschien heb je volgende keer meer geluk!")
+      
 #Galgje mannetje verschillende staten
 def display_hangman(tries):
-  stages = []
+  stages = [  """
+                   --------
+                   |      |
+                   |      O
+                   |     \|/
+                   |      |
+                   |     / \
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      O
+                   |     \|/
+                   |      |
+                   |     /
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      O
+                   |     \|/
+                   |      |
+                   |
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      O
+                   |     \|
+                   |      |
+                   |
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      O
+                   |
+                   |
+                   |
+                   -
+                   """,
+                   """
+                   --------
+                   |      |
+                   |      
+                   |
+                   |
+                   |
+                   -
+                   """
+    ]
+    return stages[tries]
