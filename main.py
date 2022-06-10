@@ -35,6 +35,16 @@ def play(word):
   print(display_hangman(tries))
   print(word_completion)
   print("\n")
+  while not guessed and tries > 0:
+    guess= input("Raad een letter of het woord").upper()
+    if len(guess) == 1 and guess.isalpha():
+      if guess in guessed_letters:
+        print("Je hebt deze letter al geprobeerd: ", guess, "!")
+      elif guess not in word:
+        print(guess, "letter is niet in het woord: ")
+        tries -= 1
+        guessed_letters.append(guess)
 
+#Galgje mannetje verschillende staten
 def display_hangman(tries):
   stages = []
