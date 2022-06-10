@@ -5,7 +5,7 @@ woordenlijst = ["informatica","informatiekunde","spelletje","aardigheidje","scho
 def get_woord(woordenlijst):
     woord = random.choice(woordenlijst)
     return woord.upper()
-# Introductiescherm
+# Introductiescherm + tekst
 def question():
     i = 0
     while i < 2:
@@ -21,7 +21,7 @@ def question():
             else:
                 print("Je moet!")
 
-# Spel Begin-Tussendoor-Eind 
+# Spel Begin-Tussendoor-Eind + tekst
 question()
 def play(woord):
     woordaanvulling = "_" * len(woord)
@@ -72,7 +72,7 @@ def play(woord):
     else:
         print("Het spijt me, maar je hebt geen gokken meer. Het woord was " + woord + ". Misschien heb je volgende keer meer geluk!")
 
-# Galgje mannetje
+# Galgje mannetje tekeningen
 def galgjemannetje(kansen):
     stages = [  """
                    --------
