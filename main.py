@@ -1,6 +1,5 @@
 #Woordenlijst
 import random
-
 word_list = ["informatica","informatiekunde","spelletje","aardigheidje","scholier","fotografie","waardebepaling","specialiteit","verzekering","universiteit","heesterperk"]
 
 def get_word(word_list):
@@ -13,8 +12,8 @@ def question():
   while i < 2:
     answer = input("Welkom! Wil je galgje spelen? (Ja of Nee)")
     if any(answer.lower() == f for f in ["Ja", 'J', 'ok', 'Y']):
-      print("Kom op dan!")
-      break
+        print("Kom op dan!")
+        break
 
     else:
      i+=1
@@ -65,7 +64,7 @@ def play(word):
         guessed = True
         word_completion = word
     else:
-        print("ongeldige input")
+      print("ongeldige input")
       print(display_hangman(tries))
       print(word_completion)
       print("\n")
@@ -140,4 +139,14 @@ def display_hangman(tries):
                    -
                    """
     ]
-    return stages[tries]
+  return stages[tries]
+#Vraag of je nog een keer wil spelen
+def main():
+  word = get_word(word_list)
+  play(word)
+  while input("Wil je nog een keer galgje spelen? (Ja/Nee) ").upper() == "J":
+    word = get_word(word_list)
+    play(word)
+
+if __name__ == "__main__":
+  main()
