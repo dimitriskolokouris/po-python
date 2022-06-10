@@ -1,16 +1,16 @@
 # Woordenlijst
 import random
-word_list = ["informatica","informatiekunde","spelletje","aardigheidje","scholier","fotografie","waardebepaling","specialiteit","verzekering","universiteit","heesterperk"]
+woordenlijst = ["informatica","informatiekunde","spelletje","aardigheidje","scholier","fotografie","waardebepaling","specialiteit","verzekering","universiteit","heesterperk"]
 
-def get_word(word_list):
-    word = random.choice(word_list)
-    return word.upper()
+def get_woord(woordenlijst):
+    woord = random.choice(woordenlijst)
+    return woord.upper()
 # Introductiescherm
 def question():
     i = 0
     while i < 2:
-        answer = input("Welkom! Wil je galgje spelen? (Ja of Nee)")
-        if any(answer.lower() == f for f in ["Ja", 'ja', '1', 'isg']):
+        antwoord = input("Welkom! Wil je galgje spelen? (Ja of Nee)")
+        if any(antwoord.lower() == f for f in ["Ja", 'J', 'ja', 'Y']):
             print("Kom op dan!")
             break
         
@@ -23,57 +23,57 @@ def question():
 
 # Spel Begin-Tussendoor-Eind 
 question()
-def play(word):
-    word_completion = "_" * len(word)
-    guessed = False
-    guessed_letters = []
-    guessed_words = []
-    tries = 6
+def play(woord):
+    woordaanvulling = "_" * len(woord)
+    geraden = False
+    geraden_letters = []
+    geraden_woorden = []
+    kansen = 6
     print("Je mag nu een letter invullen!")
-    print(display_hangman(tries))
-    print(word_completion)
+    print(galgjemannetje(kansen))
+    print(woordaanvulling)
     print("\n")
-    while not guessed and tries > 0:
-        guess = input("Raad een letter of woord: ").upper()
-        if len(guess) == 1 and guess.isalpha():
-            if guess in guessed_letters:
-                print("Je hebt deze letter al geprobeerd: ", guess, "!")
-            elif guess not in word:
-                print(guess, "is niet in het woord :(")
-                tries -= 1
-                guessed_letters.append(guess)
+    while not geraden and kansen > 0:
+        raadsel = input("Raad een letter of woord: ").upper()
+        if len(raadsel) == 1 and raadsel.isalpha():
+            if raadsel in geraden_letters:
+                print("Je hebt deze letter al geprobeerd: ", raadsel, "!")
+            elif raadsel not in woord:
+                print(raadsel, "is niet in het woord :(")
+                kansen -= 1
+                geraden_letters.append(raadsel)
             else:
-                print("Goed zo,", guess, "is in het woord!")
-                guessed_letters.append(guess)
-                word_as_list = list(word_completion)
-                indices = [i for i, letter in enumerate(word) if letter == guess]
+                print("Goed zo,", raadsel, "is in het woord!")
+                geraden_letters.append(raadsel)
+                woord_as_list = list(woordaanvulling)
+                indices = [i for i, letter in enumerate(woord) if letter == raadsel]
                 for index in indices:
-                    word_as_list[index] = guess
-                word_completion = "".join(word_as_list)
-                if "_" not in word_completion:
-                    guessed = True
-        elif len(guess) == len(word) and guess.isalpha():
-            if guess in guessed_words:
-                print("Je hebt dit al geprobeerd: ", guess, "!")
-            elif guess != word:
-                print(guess, " is niet het woord :(")
-                tries -= 1
-                guessed_words.append(guess)
+                    woord_as_list[index] = raadsel
+                woordaanvulling = "".join(woord_as_list)
+                if "_" not in woordaanvulling:
+                    geraden = True
+        elif len(raadsel) == len(woord) and raadsel.isalpha():
+            if raadsel in geraden_woorden:
+                print("Je hebt dit al geprobeerd: ", raadsel, "!")
+            elif raadsel != woord:
+                print(raadsel, " is niet het woord :(")
+                kansen -= 1
+                geraden_woorden.append(raadsel)
             else:
-                guessed = True
-                word_completion = word
+                geraden = True
+                woordaanvulling = woord
         else:
             print("ongeldige input")
-        print(display_hangman(tries))
-        print(word_completion)
+        print(galgjemannetje(kansen))
+        print(woordaanvulling)
         print("\n")
-    if guessed:
+    if geraden:
         print("Goed zo, je hebt het woord geraden!")
     else:
-        print("Het spijt me, maar je hebt geen gokken meer. Het woord was " + word + ". Misschien heb je volgende keer meer geluk!")
+        print("Het spijt me, maar je hebt geen gokken meer. Het woord was " + woord + ". Misschien heb je volgende keer meer geluk!")
 
 # Galgje mannetje
-def display_hangman(tries):
+def galgjemannetje(kansen):
     stages = [  """
                    --------
                    |      |
@@ -138,15 +138,15 @@ def display_hangman(tries):
                    -
                    """
     ]
-    return stages[tries]
+    return stages[kansen]
 
 # Nog een keer spelen?
 def main():
-    word = get_word(word_list)
-    play(word)
+    woord = get_woord(woordenlijst)
+    play(woord)
     while input("Wil je nog een keer galgje spelen? (J/N) ").upper() == "J":
-        word = get_word(word_list)
-        play(word)
+        woord = get_woord(woordenlijst)
+        play(woord)
 
 
 if __name__ == "__main__":
